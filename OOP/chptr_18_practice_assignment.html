@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- html form -->
+     <form>
+        <fieldset style="width:0px;">
+            <legend>Customer Info:</legend>
+
+
+            <label for="custID">ID:</label>
+            <!-- this value 0 is the default! -->
+            <input type="number" id="custID" value="0">
+            <br>
+
+            <!-- must convert first char to upper! -->
+            <label for="sName">Name:</label>
+            <!-- <input type="text" id="sName" onkeyup="makeCap();"> -->
+            <input type="text" id="sName" onkeyup="this.value = this.value.toUpperCase()">
+            <br>
+
+            <label for="sAcct">Account:</label>
+            <input type="text" id="sAcct" onkeyup="capIt(this)">
+            <br>
+
+            <label for="fBal">Balance:</label>
+            <input type="number" id="fBal" value="0">
+            <br><br>
+
+            <!-- button -->
+            <button type="button" onclick="storeData();">Add Customer</button>
+        </fieldset>
+     </form>
+
+
+     <!-- dispaly stuff -->
+      <p id="myOutput"></p>
+
+
+
+    <script>
+
+
+        // function to capitalize the account first letter only 
+        function capIt(oInput)
+        {
+            // check if we're on the first letter or not
+            if (oInput.value.length ==1)
+            {
+                oInput.value = oInput.value.charAt(0).toUpperCase();
+            }
+        };
+
+        // capitalize
+        function makeCap() 
+        {
+            let sValue = document.getElementById("sName").value;
+            document.getElementById("sName").value = sValue.toUpperCase();
+
+            // or
+            // document.getElementById("custName").value = document.getElementById("custName").value .toUpperCase();
+        };
+
+        // function to make a customer and store their info
+        function storeData()
+        {
+
+            // create a new customer based on the form inputs!
+            // make sure to make them ints when needed!
+            let oCustomer = new Customer(parseFloat(document.getElementById("custID").value),
+                                         document.getElementById("sName").value,
+                                         document.getElementById("sAcct").value,
+                                         parseFloat(document.getElementById("fBal").value));
+
+
+            document.getElementById("myOutput").innerHTML = oCustomer.getCustomerInfo();
+
+            // 
+            function getCustomerInfo()
+            {
+
+            };
+        };
+
+
+
+
+        // create a class
+        class Customer
+        {
+
+            // create a class attribute
+            static companyName = "Fastforward Movies";
+
+            // consructor take parameters to build the object
+            constructor(iId, sName, sAcct, fBal)
+            {
+                this.custID = iId;
+                this.custName = sName;
+                this.custAcct = sAcct;
+                this.balance = fBal;
+            }
+
+
+            // method to get info
+            getCustomerInfo()
+            {
+                return (this.custName + " $" + this.balance);
+            }
+        }
+    </script>
+    
+</body>
+</html>

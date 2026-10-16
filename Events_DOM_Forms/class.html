@@ -1,0 +1,167 @@
+<!-- Rebekah Kinghorn
+    Class Work
+    DOM, forms, events, etc
+    Sept. 29, 2026 -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Love Calculator</h1>
+
+    <form id="myForm">
+        <fieldset>
+            <legend>Personal Info</legend>
+
+            <label for="name1">Name 1: </label>
+            <input type="text" id="name1" name="name1" autofocus>
+
+            <br><br>
+
+            <label for="name2">Name 2:</label>
+            <input type="text" id="name2" name="name2">
+
+            <button onclick="processNames()">Calculate!</button>
+            <button onclick="clearNames()">Clear</button>
+
+            <p id="result"></p>
+
+        </fieldset>
+    </form>
+
+    <script>
+        result = document.getElementById("name1")
+
+
+        function processNames()
+        {
+            const name1Result = document.getElementById("name1").value.toLowerCase() ;
+            // console.log(name1Result);
+
+            const name2Result = document.getElementById("name2").value.toLowerCase();
+
+            const asLetters = name1Result.match(/[a-z]/g);
+
+            iLoveScore = 0;
+
+
+            //loop through each character of the name
+            // for (let char of name1Result)
+            // {
+            //     console.log(char)
+
+            //     if (char === 't')
+            //     {
+                    
+            //     }
+            // }
+
+            //make array for the two names
+            const asNamesArray = new Array(2);
+            asNamesArray[0] = name1Result;
+            asNamesArray[1] = name2Result;
+
+            const aiScoresArray = new Array(2);
+
+
+            //loop through my array of names and check for true love
+            for (iNameCount = 0; iNameCount <2; iNameCount++)
+            {
+                //keep track of score for name 1
+                isTrueLove = asNamesArray[iNameCount].includes('t');
+                if (isTrueLove == true)
+                {
+                    iLoveScore += 10;
+                }
+                
+                isTrueLove = asNamesArray[iNameCount].includes('r');
+                if (isTrueLove == true)
+                {
+                    iLoveScore += 10;
+                }
+                
+                isTrueLove = asNamesArray[iNameCount].includes('u');
+                if (isTrueLove == true)
+                {
+                    iLoveScore += 10;
+                }
+                
+                isTrueLove = asNamesArray[iNameCount].includes('e');
+                if (isTrueLove == true)
+                {
+                    iLoveScore += 10;
+                }
+                
+                isTrueLove = asNamesArray[iNameCount].includes('l');
+                if (isTrueLove == true)
+                {
+                    iLoveScore += 10;
+                }
+                
+                isTrueLove = asNamesArray[iNameCount].includes('o');
+                if (isTrueLove == true)
+                {
+                    iLoveScore += 10;
+                }
+                
+                isTrueLove = asNamesArray[iNameCount].includes('v');
+                if (isTrueLove == true)
+                {
+                    iLoveScore += 10;
+                }
+                
+                isTrueLove = asNamesArray[iNameCount].includes('e');
+                if (isTrueLove == true)
+                {
+                    iLoveScore += 10;
+                }
+
+                aiScoresArray[iNameCount] = iLoveScore
+            }
+
+
+            //display scores
+            for (iCountArray = 0; iCountArray<2; iCountArray++)
+            {
+                alert(`${asNamesArray[iCountArray]}'s score is ${aiScoresArray[iCountArray]}`);
+            }
+
+
+            //display results of loooove
+            const iLoveTotal = Math.sumPrecise(aiScoresArray);
+            if (iLoveTotal >= 70)
+            {
+                alert(`TRUE LOVE`);
+            }
+            else
+            {
+                alert(`NOT TRUE LOVE`);
+            }
+
+
+
+            // //find specific letter in the letters array
+            // for(let iCount = 0; iCount < asLetters.length; iCount++)
+            // {
+            //     if (asLetters[iCount] = 0) 
+            // }
+
+            // console.log(asLetters);
+
+            // document.getElementById(myForm)
+            
+            // asLetters.forEach(letter => {
+            //     console.log(letter)
+            // });
+
+        }
+        
+    </script>
+    
+</body>
+</html>

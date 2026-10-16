@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>The Button</h1>
+
+    <button type="button" onclick="alert('hello world');">I am a button.</button>
+    <button type="button" onclick="printIt();">I am another button.</button>
+
+    <script>
+        function printIt()
+        {
+            const name= "juan"
+            alert("hello " + name);
+        }
+    </script>
+
+    <button type="button" id="myButton"
+                                    onclick="alert('Clicked');"
+                                    onmouseover="alert('Over');"
+                                    onwheel="alert('Wheel');"
+                                    onmouseout="alert('Out');">Click Me</button>
+            
+</body>
+</html> 

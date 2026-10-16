@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- create form -->
+    <form>
+        <!-- designate fieldset area -->
+        <fieldset>
+            <!--legend is the section title -->
+            <legend>Child Signup Info:</legend>
+            <!-- label is the question label -->
+            <label for="childName">Name:</label>
+            <!-- the for ^ and the id \/ need to match!! -->
+            <input type="text" id="childName" autofocus>
+            <br>
+            <br>
+
+            <label for="childGrade">Grade:</label>
+            <input type="text" id="childGrade">
+            <br>
+            <br>
+
+            <label for="childAge">Age:</label>
+            <input type="text" id="childAge">
+            <br>
+            <br>
+
+            <button type="button" onclick="addChild();">Click to Register!</button>
+        </fieldset>
+    </form>
+    <br>
+    <br>
+
+    <p id="childOutput"></p>
+
+
+
+    <!-- add js! -->
+    <script>
+        class Child
+        {
+            constructor()
+            {
+                this.name;
+                this.age;
+                this.age;
+            }
+
+            getDetails()
+            {
+                return this.name + " is in " + this.grade + ".";
+            }
+        }
+
+        let oChild1 = new Child();
+
+        function addChild()
+        {
+            oChild1.name = document.getElementById("childName").value;
+            oChild1.age = parseFloat(document.getElementById("childAge").value);
+            oChild1.grade = parseFloat(document.getElementById("childGrade").value);
+
+            document.getElementById("childOutput").innerHTML = oChild1.name + " is " + oChild1.age + " years old.";
+            // document.getElementById("childOutput").innerHTML = oChild1.getDetails();
+            // console.log(oChild1.getDetails());
+
+        }
+
+
+        
+    </script>
+</body>
+</html>

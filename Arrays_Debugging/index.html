@@ -1,0 +1,253 @@
+//Rebekah Kinghorn
+//403 bus programming
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src = "practice_chptr_11.js" ></script>
+</head>
+<body>
+    <script>
+        // main();
+
+        //Rebekah Kinghorn
+        //403 bus programming
+        //arrays
+
+
+
+
+        //making arrays and such
+
+        //initialize array / practice
+        const emptyArray = [];
+
+        const fruit = ["Apple", "Banana", "Mango"];
+        const mixed = [42, "hello", true, {name: "Alice"}];
+
+        // console.log(emptyArray[0]);
+
+
+
+
+
+        //practice accessing stuff 
+        let asPeople = ["John", "David", "Sara", "Harper"];
+
+        // alert(asPeople[0]);
+        // alert(asPeople[1]);
+        // alert(asPeople[2]);
+        // alert(asPeople[3]);
+
+
+
+
+        // //fancy for loop to access stuff
+        // for(let iCounter = 0; iCounter < asPeople.length; iCounter++)
+        // {
+        //    alert(asPeople[iCounter]); 
+        // }
+
+
+
+
+
+        //modifying elements
+
+        //create array and input values
+        let asMovies = new Array(3);
+
+        // asMovies[0] = prompt("Enter title: ");
+        // asMovies[1] = prompt("Enter title: ");
+        // asMovies[2] = prompt("Enter title: ");
+
+
+
+        //input values with loop instead!
+        // for (let iMovieCounter = 0; iMovieCounter < asMovies.length; iMovieCounter++)
+        // {
+        //     asMovies[iMovieCounter] = prompt(`what's the title of movie ${iMovieCounter}`);
+        // }
+
+        //be careful when adding stuff; if you add stuff to pos 7 and it's not there _
+        //then it'll add it and add an undefined gap 
+
+
+
+
+        //make a looping array
+        // let iNumEmps = parseInt(prompt("How many emps? "));
+
+        // let asEmps = new Array(iNumEmps);
+
+
+
+
+        //push/pull
+        let asBreakfast = ["SPAM", "bacon", "grits"];
+        let sFood = prompt("Enter food: ");
+
+        //if you add something like _
+        //bread, pancakes _
+        //it will add both of those to the last item
+        
+        let iSize;
+        iSize = asBreakfast.push(sFood);
+
+        // alert(iSize);
+        
+
+
+
+        //pop
+        //remove last element from array
+        // alert(asBreakfast)
+        // let sOutput = "";
+
+        // //pops last item
+        // asBreakfast.pop();
+
+
+        // //loop through array and display it
+        // for (let iNewCount = 0; iNewCount < asBreakfast.length; iNewCount++)
+        // {
+        //     sOutput = sOutput + " " + asBreakfast[iNewCount];
+        // }
+
+        // alert(sOutput);
+
+
+
+
+        //shift
+        //shift removes first element and decreases the length by one
+
+        //you can assign a var to the shifted or popped value
+        // remove = asBreakfast.shift()
+        // alert(remove);
+        // //you can push a value to the end
+        // asBreakfast.push(remove);
+        // alert(asBreakfast);
+
+
+
+
+        //forEach function 
+        let asFood = ["potatoes", "chicken", "fries"];
+        let sNewOutPut = "";
+
+        //computer will grab each list item and rename it sNewFood within this function
+        asFood.forEach(function(sNewFood)
+        {
+            sNewOutPut = sNewOutPut + " " + sNewFood;
+        });
+
+
+        //the alert will now show each item concatenated together
+        alert(sNewOutPut);
+
+        
+
+
+
+        //nested loops
+
+        //initialize arrays
+
+
+
+        //FIX THIS SO IT DOESN'T DISPLAY THE ALERT WITHOUT CLEARING IT FIRST;
+
+
+        //initialize
+        let asCustomer = new Array(3);
+        let asPurchase = new Array(3);
+
+        //loop through the outer array 3 times
+        for (let iOuter = 0; iOuter < 3; iOuter++)
+        {
+
+            //initialize alert variable for the inner loop
+            let sPurchaseOutput = "";
+            
+            //ask for input on the cust name in the outer loop
+            asCustomer[iOuter] = prompt("Cust name pls: ");
+
+            //for the number of customer we're currently on, make a sub-array
+            //the two arrays are linked by the same index!!
+            asPurchase[iOuter] = new Array(3);
+
+
+
+
+            //for each item of the sub-array, loop through 
+            for (let iInner = 0; iInner <3; iInner++)
+            {
+                //keep track of which outer item we're on and loop through the inner items
+                asPurchase[iOuter][iInner] = prompt("Purchase was... ");
+
+                asPurchase.forEach(function(sOnePurchase)
+                {
+                    sPurchaseOutput = sPurchaseOutput + sOnePurchase
+                })
+                
+            }
+
+            alert(`The cust named ${asCustomer[iOuter]} purchased: ${sPurchaseOutput}`);
+        
+        }
+
+
+
+
+
+        //sorting arrays
+        //*GREG EXAMPLE, NOT MINE*
+         let asVendors = ["Walmart", "amazon", "Costco"];
+            let sOutput = "";
+        
+            asVendors.sort(function (a, b) 
+            { 
+                if (a.toLowerCase() < b.toLowerCase())
+                    return -1;
+                else if (a.toLowerCase() > b.toLowerCase())
+                    return 1;
+                else
+                    return 0;
+            } );
+                
+            asVendors.forEach(sName => {
+                sOutput = sOutput + sName + " ";            
+            });
+                        
+            alert(sOutput);
+            
+            
+            //review arrow functions
+            //normal funct
+            function todouble(iNumber)
+            {
+                return iNumber *2;
+            }
+
+            //arrow funct
+            //create the variable called DOUBLE
+            //receive parameter INUMBER
+            //return the iNumber * 2
+            const double = (iNumber) => iNumber *2;
+
+            iResult = double(5);
+            alert(iResult);
+
+            //you can use arrow functs for sorting
+            asMyArray = [36, 2, 400, 39];
+            asMyArray.sort((a,b) => b -a); 
+            alert(asMyArray);
+
+    </script>
+    
+</body>
+</html>

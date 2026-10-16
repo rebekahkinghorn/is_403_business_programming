@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- titles -->
+    <h1>Pawsitive Cheese Place</h1>
+    <p>Select Cheeseballs from the List Below</p>
+
+<!-- form to input pets -->
+    <form>
+        <fieldset>
+            <legend>Pet Input</legend>
+            <label for="petName">Name:</label>
+            <input type="text" id="petName" autofocus>
+            <br> <br>
+
+            <label for="petAge">Age:</label>
+            <input type="text" id="petAge">
+            <br> <br>
+
+            <label for="petType">Type:</label>
+            <input type="text" id="petType">
+            <br> <br>
+
+            <label for="petDescription">Describe the furball:</label>
+            <input type="text" id="petDescription">
+            <br> <br>
+
+            <button type="button" onclick="addPet(), displayData();">Click to Add Lovable Furball</button>
+        </fieldset>
+
+        <br>
+    </form>
+    
+    <!-- display output -->
+    <p id="petOutput"></p>
+
+
+    <form>
+        <fieldset>
+            <legend>Buy a Cheese Pet</legend>
+            <label>Pick a Pet: Type a the Number of the Pet You Want from the List</label>
+            <input type="text" id="petNumber">
+            <br> <br>
+            <button type="button" onclick="buyPet();">Click to Kill the Pet off the List!</button>
+        </fieldset>
+        
+    <!-- display available -->
+     <p id="petAvailability"></p>
+    </form>
+
+
+    <!-- insert js! -->
+    <script>
+
+        // pet class to make pet objects
+        class Pet
+        {
+            constructor()
+            {
+                this.name;
+                this.age;
+                this.type;
+                this.description;
+                this.available = true;
+            }
+
+        
+            displayDetails()
+            {
+                return this.name + " is a " + this.age + " " + " year old " + this.type + ". Description: " + this.description + "."
+            }
+        }
+
+
+        // create pet array
+        let aPetArray = new Array();
+  
+
+        //output pets
+        let sOutPut = "";
+        let sFinalDisplay = "";
+
+        //make output array
+        aOutPutArray = new Array();
+
+
+        //which pet they want to buy
+        let iPetChosen = "";
+
+        //display availability
+        let iPetAvailable = "";
+        let dMoney = "";
+
+  
+            // add pet objects
+            function addPet()
+            {
+                let oPet1 = new Pet();
+                oPet1.name = document.getElementById("petName").value;
+                oPet1.age = document.getElementById("petAge").value;
+                oPet1.type = document.getElementById("petType").value;
+                oPet1.description = document.getElementById("petDescription").value;
+                
+                
+                // add pet to array
+                aPetArray.push(oPet1);
+                // let index = aPetArray.indexOf()
+                // iPetLocation = aPetArray.
+
+                
+                //loop through pet array
+
+                    sOutPut = "";
+                    sOutPut = "<br>" + oPet1.name + " is a " + oPet1.age + " " + " year old " + oPet1.type + ". Description: " + oPet1.description + ".";
+                    aOutPutArray.push(sOutPut)
+
+            }
+
+
+
+
+            function displayData()
+            {
+                
+                document.getElementById("petOutput").innerHTML = "";
+                sFinalDisplay = "";
+
+
+                //loop thorugh array for display
+                for (let iCountNew = 0; iCountNew < aOutPutArray.length; iCountNew++)
+                {
+                    sFinalDisplay = sFinalDisplay + aOutPutArray[iCountNew] + " (pet number: " + iCountNew + ")";
+                    //display info
+
+                }
+                document.getElementById("petOutput").innerHTML = sFinalDisplay;
+
+
+            }
+
+
+            //function to mark a pet as bought already
+            function buyPet()
+            {
+                let iPetChosen = parseFloat(document.getElementById("petNumber").value);
+                alert(aPetArray[iPetChosen].name + " just got bought. Too bad for you.");
+                aPetArray[iPetChosen].available = false;
+
+
+                //set to empty
+                iPetAvailable = "";
+
+                for (iCounter = 0; iCounter < aPetArray.length; iCounter++)
+                {
+                    if(aPetArray[iCounter].available === false)
+                    {
+                        dMoney = "UNAVAILABLE: ";
+                    }
+                    else
+                    {
+                        dMoney = "AVAILABLE: "
+                    }
+                    iPetAvailable = iPetAvailable + "<br>" + dMoney + aPetArray[iCounter].name + " is a " + aPetArray[iCounter].age + " " + " year old " + aPetArray[iCounter].type + ". Description: " + aPetArray[iCounter].description + "." + " (pet number: " + iCounter + ")";;
+                }
+                document.getElementById("petAvailability").innerHTML = iPetAvailable;
+                document.getElementById("petOutput").innerHTML = "";
+            }
+    
+    </script>
+</body>
+</html>

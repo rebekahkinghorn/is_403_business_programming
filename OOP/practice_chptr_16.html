@@ -1,0 +1,199 @@
+<!-- Rebekah Kinghorn
+ Practice Chapter 16
+ Bus Programming -->
+
+
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+
+
+    <!-- overall form -->
+    <form>
+        <fieldset>
+            <legend>Sign Up</legend>
+
+            <label for="username">Enter Your Username:</label>
+            <input type="text" id="username">
+            <br> <br>
+
+            <!-- password -->
+            <label for="txtPassword">Enter Your Password:</label>
+            <input type="password" id="txtPassword">
+            <br> <br>
+
+
+
+
+            <!-- new form for radio buttons -->
+            <fieldset style="width: 350px;">
+                <form id="proteinForm">
+                    <legend>Pick Your Favorite:</legend>
+                    <input type="radio" name="favFood" id="rbProtein" value="protein" checked>
+                    <label for="rbProtein">Protein</label>
+                    <br>
+                    
+                    
+                    <input type="radio" name="favFood" id="rbNotProtein" value="notProtein">
+                    <label for="rbNotProtein">Not Protein</label>
+                    <br>
+                </form>
+            </fieldset>
+            <br>
+
+
+
+
+
+            <!-- new form for checkboxes -->
+            <fieldset style="width: 350px;">
+                <form id="sportsCheckboxes">
+                    <legend>Pick Your Favorite:</legend>
+                    <input type="checkbox" name="favSport" id="cbRunning" value="running">
+                    <label for="cbRunning">Running</label>
+                    <br>
+                    
+                    
+                    <input type="checkbox" name="favSport" id="cbBiking" value="biking">
+                    <label for="cbBiking">Biking</label>
+                    <br>
+
+                    <input type="checkbox" name="favSport" id="cbSwimming" value="swimming">
+                    <label for="cbSwimming">Swimming</label>
+                    <br>
+
+                    <input type="checkbox" name="favSport" id="cbGym" value="gym">
+                    <label for="cbGym">LEG DAY (gym)</label>
+                    <br>
+
+                </form>
+            </fieldset>
+            <br>
+
+
+
+
+
+
+            <!-- new form for select/option -->
+            <fieldset style="width: 350px;">
+                <form id="sleepSelect">
+                    <legend>How Many Hours:</legend>
+                    <select name="sleep" id="listSleep">
+                        <option value="low">0-4 hours (low)</option>
+                        <option value="mid">5-7 hours (mid)</option>
+                        <option value="high">8-11 hours (high)</option>                        
+                    </select>
+                    <br> <br>
+                </form>
+            </fieldset>
+            <br>
+
+
+
+
+
+            <!-- submit button -->
+            <button type="button" onclick="displayPassword(), 
+                                displayProteinChoice(),
+                                displaySportChoice(),
+                                displaySleepSelection();">Show Password</button>
+        </fieldset>
+
+        <!-- this p displays the text upon button click -->
+        <p id="myOutput"></p>
+    </form>
+
+
+    <!-- js to handle the form stuff -->
+    <script>
+
+        // displays password
+        function displayPassword()
+        {
+            document.getElementById("myOutput").innerHTML = "Password: " + document.getElementById("txtPassword").value;
+        };
+
+
+        // displays protein choice
+        function displayProteinChoice()
+        {
+            if(document.getElementById("rbProtein").checked)
+            {
+                document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + "<br>" + "Protein choice: CORRECT! You rock! Get those gains.";
+            }
+
+            else if (document.getElementById("rbNotProtein").checked)
+            {
+                document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + "<br>" + "Protein choice: You need some gains...";  
+            }
+        };
+
+        // displays sport choice
+        function displaySportChoice()
+        {
+            let newMyOutput = "<br>" + "Sports Choice: ";
+            const checkedSportsBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+            if (checkedSportsBoxes.length > 0)
+            {
+                checkedSportsBoxes.forEach((checkbox) => 
+                {
+                    newMyOutput = newMyOutput + checkbox.value + " ";
+                }
+            )
+            }
+
+            else
+            {
+                newMyOutput = "<br>" + "Sports Choice: No gains.";
+            }
+
+            // display
+            document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + newMyOutput;
+
+            }   
+
+
+
+
+            // function to display user sleep choice
+            function displaySleepSelection()
+            {
+                document.getElementById("myOutput").innerHTML += "<br>" + document.getElementById("listSleep").value + " - Get some rest, Pam. You look tired."
+            }
+
+        // {
+        //     if(document.getElementById("cbRunning").checked)
+        //     {
+        //         newMyOutput = document.getElementById("myOutput").innerHTML + "<br>" + "Sport Choice: Speedy legs.";
+        //         document.getElementById("myOutput").innerHTML = newMyOutput;
+        //         // document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + "<br>" + "Sport Choice: Speedy legs.";
+        //     }
+
+        //     else if (document.getElementById("cbBiking").checked)
+        //     {
+        //         newMyOutput = document.getElementById("myOutput").innerHTML + "<br>" + "Sport Choice: Got quads?.";
+        //         document.getElementById("myOutput").innerHTML = newMyOutput;
+        //         // document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + "<br>" + "Sport Choice: Speedy legs.";
+        //     }
+
+        //     else if (document.getElementById("cbSwimming").checked)
+        //     {
+        //         document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + "<br>" + "Sport Choice: Swimming for dayyyys! ";  
+        //     }
+
+        //     else if (document.getElementById("cbGym").checked)
+        //     {
+        //         document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + "<br>" + "Sport Choice: DON'T SKIP LEG DAY!";  
+        //     }
+        // }
+    </script>
+ </body>
+ </html>

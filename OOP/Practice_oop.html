@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+
+    <style>
+        /* Make width and height calculations easier */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background-color: #f3f6fa;
+            color: #243447;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #174a7e;
+        }
+
+        .intro {
+            color: #5c6b7a;
+            margin-bottom: 20px;
+        }
+
+        /* Student grid */
+        .student-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1.3fr 1fr .7fr;
+            border: 1px solid #ccd6e0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .grid-header {
+            background-color: #174a7e;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+        }
+
+        .grid-cell {
+            padding: 12px;
+            border-bottom: 1px solid #dce3ea;
+            cursor: pointer;
+        }
+
+        .grid-cell.selected {
+            background-color: #d9ecff;
+        }
+
+        /* Buttons */
+        button {
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            margin-right: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .primary-button {
+            background-color: #174a7e;
+            color: white;
+        }
+
+        .edit-button {
+            background-color: #e0a800;
+            color: white;
+        }
+
+        .delete-button {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        .cancel-button {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        /* Student form */
+        #studentForm {
+            display: none;
+            margin-top: 30px;
+        }
+
+        fieldset {
+            border: 1px solid #ccd6e0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        legend {
+            font-size: 20px;
+            font-weight: bold;
+            color: #174a7e;
+            padding: 0 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / 3;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 9px;
+            border: 1px solid #b8c4cf;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .choice-group {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .choice-group label {
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+
+        .form-buttons {
+            margin-top: 20px;
+        }
+
+        /* Delete confirmation window */
+        .modal-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.45);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .modal h2 {
+            margin-top: 0;
+            color: #c0392b;
+        }
+    </style>
+</head>
+
+
+<!--
+    When the page finishes loading, call loadStudents().
+    This creates the three starting students.
+-->
+
+<body onload="loadStudents()">
+
+    <div class="container">
+
+        <h1>Student Management System</h1>
+
+        <p class="intro">
+            Select a student from the grid to edit or delete the student.
+            Click Add Student to create a new student.
+        </p>
+
+
+        <!-- STUDENT GRID -->
+        <div class="student-grid" id="studentGrid">
+        </div>
+
+
+        <!-- MAIN BUTTO NS -->
+        <div>
+            <button type="button"
+                    class="primary-button"
+                    onclick="openAddForm()">
+                Add Student
+            </button>
+
+            <button type="button"
+                    class="edit-button"
+                    onclick="openEditForm()">
+                Edit Student
+            </button>
+
+            <button type="button"
+                    class="delete-button"
+                    onclick="requestDelete()">
+                Delete Student
+            </button>
+        </div>
+
+
+        <!-- ADD / EDIT STUDENT FORM -->
+        <form id="studentForm">
+
+            <fieldset>
+
+                <legend id="formLegend">Add Student</legend>
+
+                <div class="form-grid">
+
+                    <!-- Text input -->
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text"
+                               id="firstName"
+                               required>
+                    </div>
+
+
+                    <!-- Text input -->
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text"
+                               id="lastName"
+                               required>
+                    </div>
+
+
+                    <!-- Password input -->
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password"
+                               id="password">
+                    </div>
+
+
+                    <!-- Number input -->
+                    <div class="form-group">
+                        <label for="gpa">GPA:</label>
+                        <input type="number"
+                               id="gpa"
+                               min="0"
+                               max="4"
+                               step="0.01">
+                    </div>
+
+
+                    <!-- Datalist -->
+                    <div class="form-group">
+
+                        <label for="major">Major:</label>
+
+                        <input type="text"
+                               id="major"
+                               list="majorList">
+
+                        <datalist id="majorList">
+                            <option value="Information Systems">
+                            <option value="Accounting">
+                            <option value="Finance">
+                            <option value="Marketing">
+                            <option value="Management">
+                        </datalist>
+
+                    </div>
+
+
+                    <!-- Combobox / select -->
+                    <div class="form-group">
+
+                        <label for="year">Year in School:</label>
+
+                        <select id="year">
+                            <option value="Freshman">Freshman</option>
+                            <option value="Sophomore">Sophomore</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Senior">Senior</option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- Date input -->
+                    <div class="form-group">
+
+                        <label for="birthDate">Birth Date:</label>
+
+                        <input type="date"
+                               id="birthDate">
+
+                    </div>
+
+
+                    <!-- Date and time input -->
+                    <div class="form-group">
+
+                        <label for="appointment">
+                            Advising Appointment:
+                        </label>
+
+                        <input type="datetime-local"
+                               id="appointment">
+
+                    </div>
+
+
+                    <!-- Radio buttons -->
+                    <div class="form-group full-width">
+
+                        <label>Enrollment Status:</label>
+
+                        <div class="choice-group">
+
+                            <label>
+                                <input type="radio"
+                                       id="fullTime"
+                                       name="status"
+                                       value="Full-time"
+                                       checked>
+                                Full-time
+                            </label>
+
+                            <label>
+                                <input type="radio"
+                                       id="partTime"
+                                       name="status"
+                                       value="Part-time">
+                                Part-time
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Checkboxes -->
+                    <div class="form-group full-width">
+
+                        <label>Interests:</label>
+
+                        <div class="choice-group">
+
+                            <label>
+                                <input type="checkbox"
+                                       id="clubProgramming"
+                                       value="Programming">
+                                Programming
+                            </label>
+
+                            <label>
+                                <input type="checkbox"
+                                       id="clubAnalytics"
+                                       value="Analytics">
+                                Analytics
+                            </label>
+
+                            <label>
+                                <input type="checkbox"
+                                       id="clubBusiness"
+                                       value="Business">
+                                Business
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Text area -->
+                    <div class="form-group full-width">
+
+                        <label for="comments">
+                            Student Notes:
+                        </label>
+
+                        <textarea id="comments"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SAVE / CANCEL -->
+                <div class="form-buttons">
+
+                    <button type="button"
+                            class="primary-button"
+                            onclick="saveStudent()">
+                        Save Student
+                    </button>
+
+                    <button type="button"
+                            class="cancel-button"
+                            onclick="cancelAddEdit()">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </fieldset>
+
+        </form>
+
+    </div>
+
+
+    <!-- DELETE CONFIRMATION WINDOW -->
+    <div class="modal-background"
+         id="deleteModal">
+
+        <div class="modal">
+
+            <h2>Delete Student</h2>
+
+            <p id="deleteMessage">
+                Are you sure you want to delete this student?
+            </p>
+
+            <button type="button"
+                    class="delete-button"
+                    onclick="confirmDelete()">
+                Delete
+            </button>
+
+            <button type="button"
+                    class="cancel-button"
+                    onclick="cancelDelete()">
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- write js -->
+
+    <script>
+        //we need to enter students and store their info
+        //add, delete, display, and update data
+
+        
+        //class person
+        class Person
+        {
+            constructor(fName, lName, password, birthDate)
+            {
+                this.fName = fName;
+                this.lName = lName;
+                this.password = password;
+                this.birthDate = birthDate;
+            }
+        }
+
+
+        //inherit from class person
+        class Student extends Person
+        {
+            constructor(fName, lName, password, birthDate, id, major, year, gpa, appointment, status, interest, comments)
+            {
+                super(fName, lName, password, birthDate)
+                
+                this.id = id;
+                this.major = major;
+                this.year = year;
+                this.gpa = gpa;
+                this.appointment = appointment;
+                this.status = status;
+                this.interest = interest;
+                this.comments = comments;
+            }
+        }
+
+
+
+        class Student extends Person
+        {
+            constructor()
+            {
+                super()
+            }
+        }
+
+
+        class Teacher
+        {
+            constructor(fName, lName)
+            {
+                this.first_name = fName;
+                this.last_name = lName;
+            }
+
+            getFullName()
+            {
+                return this.first_name + ' ' + this.last_name;
+            }
+        }
+
+        //get and set
+        
+
+
+
+        
+        class ClassPet
+        {
+            #pet_name
+
+            constructor()
+            {
+                this.#pet_name = "";
+            }
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

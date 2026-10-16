@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="myh1">Title Goes Here</h1>
+    <h2 class="myh2">First h2</h2>
+    <h2 class="myh2">Second h2</h2>
+
+    <p id="myp">Paragraph goes here</p>
+
+    <input type="radio" id="rbFirst" name="number" value="first">
+    <label for="rbFirst">First</label><br>
+
+    <input type="radio" id="rbSecond" name="number" value="second">
+    <label for="rbSecond">Second</label><br>
+
+    
+    <!-- button -->
+    <button type="button" onclick="myFunct()">Click Me...</button>
+
+    <!-- js -->
+    <script>
+        // document.getElementById("myp").innerHTML = "changed";
+
+        // this will run the funct to change the p text
+        function myFunct()
+        {
+            document.getElementById("myp").innerHTML = "changed"
+
+            const radios = document.querySelectorAll(
+                'input[name="number"]'
+            )
+
+            for (let iCount = 0; iCount<radios.length; iCount++)
+            {
+                if (radios[iCount].checked)
+                {
+                    selectedValue = radios[iCount].value;
+                    console.log(selectedValue)
+                    break;
+                }
+            }
+
+
+        }
+
+        // this will find the classes called myh2 and do stuff to each of them
+        //you won't see First H2 or Second H2
+        var listTags = document.getElementsByClassName("myh2");
+
+        for (let iCount = 0; iCount < listTags.length; iCount++)
+        {
+            listTags[iCount].innerHTML = "test"
+        }
+    </script>
+</body>
+</html>

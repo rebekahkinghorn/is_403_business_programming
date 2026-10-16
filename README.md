@@ -7,3 +7,9 @@ No extensions or other downloads required.
 
 ###GitHub access
 https://github.com/rebekahkinghorn/is_403_business_programming
+
+## Additional class folders
+
+- [Arrays and Debugging](Arrays_Debugging/) — Chapters 11–12
+- [Events, DOM, and Forms](Events_DOM_Forms/) — Chapters 13–16
+- [Object-Oriented Programming](OOP/) — Chapters 17–18
