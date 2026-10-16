@@ -1,0 +1,71 @@
+<!--Rebekah Kinghorn
+bus programming
+nubmer guessing js
+uses Math.random(),
+alerts,
+console.log()-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        let sPlayerName = prompt("What is your name? ");
+        alert("Welcome to the Number Guessing Game, " + sPlayerName + "!");
+        console.log("Welcome to the Number Guessing Game, " + sPlayerName + "!");
+
+        //secret number
+        let iSecretNumber = Math.floor(Math.random() * 20) + 1;
+
+        alert(iSecretNumber);  
+
+
+        //purposeful error
+        // const iMyInt = 25;
+        // iMyInt = 'hi'
+        // console.log(iMyInt);
+
+
+        //creating variables and a while loop
+        let iGuess = 0;
+        let iNumberOfGuesses = 0
+        const iMaxGuesses = 5
+
+
+        // *this broke...... idk why yet 
+
+        while (iGuess != iSecretNumber && iNumberOfGuesses < iMaxGuesses) {
+            let iGuess = parseInt(prompt("Guess a number between 1 and 20: "))
+            // iNumberOfGuesses = iNumberOfGuesses + 1
+            iNumberOfGuesses++;
+        }
+
+
+        //let vs var
+
+        //the let will die outside of the {block}
+        {let x = 1;}
+        //if you use let outside of {}, then the whole program is the block and the let won't die
+
+        //the var lives in the whole program
+        {var x=1;}
+
+        //practice funct
+        function test()
+        {
+            let x = 10;
+        }
+
+        //this won't work bc x is a local variable
+        console.log(x)
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
