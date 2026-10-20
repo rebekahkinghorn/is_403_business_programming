@@ -104,6 +104,10 @@
                                 displayProteinChoice(),
                                 displaySportChoice(),
                                 displaySleepSelection();">Show Password</button>
+
+            
+            <!-- button to remove sports choices
+             <button type="button" onclick="removeSportsChoice();">Remove Sports Choice</button> -->
         </fieldset>
 
         <!-- this p displays the text upon button click -->
@@ -136,8 +140,10 @@
         };
 
         // displays sport choice
+        let newMyOutput = "";
         function displaySportChoice()
         {
+            //check for any boxes that were selected
             let newMyOutput = "<br>" + "Sports Choice: ";
             const checkedSportsBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
 
@@ -158,7 +164,7 @@
             // display
             document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + newMyOutput;
 
-            }   
+        }   
 
 
 
@@ -194,6 +200,62 @@
         //         document.getElementById("myOutput").innerHTML = document.getElementById("myOutput").innerHTML + "<br>" + "Sport Choice: DON'T SKIP LEG DAY!";  
         //     }
         // }
+
+
+
+        // CHAPTERS 18/19 OOP!
+        class Athlete
+        {
+            constructor(name, sport, record, height, happy_score)
+            {
+                this.name = name;
+                this.sport = sport;
+                this.record = record;
+                this.height = height;
+                this.happy_score = happy_score;
+            }
+
+            display_info()
+            {
+                return this.name + "'s record is: " + this.record + " , their height is " + this.height + 
+                    " and their happiness level is: " + this.happy_score + "."
+            }
+        }
+
+        class Workout 
+        {
+            constructor(workout_name)
+            {
+                this.workout_name = workout_name;
+                this.athlete
+            }
+
+            display_info()
+            {
+                return this.workout_name + " is " + this.athlete.name + "'s sport of choice."
+            }
+        }
+
+        function processData()
+        {
+            let oAthlete1;
+            let oAthelte2;
+            let oWorkout1;
+            let oWorkout2;
+            let sMyOutput = "";
+        }
+
+
+        // create objects
+        oAthlete1 = new Athlete("Tyler", "Gym", 250, 64, 9);
+
+        oWorkout1 = new Workout("Gym");
+
+
+        sMyOutput = oWorkout1.display_info() + oAthlete1.display_info();
+        alert(sMyOutput);
+
+
     </script>
  </body>
  </html>
