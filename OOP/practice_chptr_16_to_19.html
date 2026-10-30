@@ -103,7 +103,9 @@
             <button type="button" onclick="displayPassword(), 
                                 displayProteinChoice(),
                                 displaySportChoice(),
-                                displaySleepSelection();">Show Password</button>
+                                displaySleepSelection(),
+                                processData(),
+                                processSportChoice();">Show Password</button>
 
             
             <!-- button to remove sports choices
@@ -204,6 +206,10 @@
 
 
         // CHAPTERS 18/19 OOP!
+
+
+
+        // This is an example of an object containing an object
         class Athlete
         {
             constructor(name, sport, record, height, happy_score)
@@ -217,17 +223,18 @@
 
             display_info()
             {
-                return this.name + "'s record is: " + this.record + " , their height is " + this.height + 
-                    " and their happiness level is: " + this.happy_score + "."
+                return this.name + "'s record is: " + this.record + " , his/her height is " + this.height + 
+                    " and his/her happiness level is: " + this.happy_score + "."
             }
         }
 
+        // the workout object gets info from the athlete object
         class Workout 
         {
-            constructor(workout_name)
+            constructor(workout_name, athlete)
             {
                 this.workout_name = workout_name;
-                this.athlete
+                this.athlete = athlete;
             }
 
             display_info()
@@ -236,6 +243,8 @@
             }
         }
 
+
+        // function to show the relatedness of the workout and athlete objects
         function processData()
         {
             let oAthlete1;
@@ -243,18 +252,125 @@
             let oWorkout1;
             let oWorkout2;
             let sMyOutput = "";
+        
+
+            // create objects
+            oAthlete1 = new Athlete("Tyler", "Gym", 250, 64, 9);
+
+            oWorkout1 = new Workout("Gym", oAthlete1);
+
+
+            sMyOutput = oWorkout1.display_info() + "\n" + oAthlete1.display_info();
+            alert(sMyOutput);
+
         }
 
 
-        // create objects
-        oAthlete1 = new Athlete("Tyler", "Gym", 250, 64, 9);
-
-        oWorkout1 = new Workout("Gym");
 
 
-        sMyOutput = oWorkout1.display_info() + oAthlete1.display_info();
-        alert(sMyOutput);
 
+        // trying a new example of a new object within a class
+        class SportOfChoice
+        {
+            constructor(sport_name)
+            {
+                this.sport_name = sport_name;
+
+                //instance variable containing an object
+                //sportofchoice is the parent, and the description is the child
+                this.description = new Description(this.sport_name);
+            }
+        };
+
+
+        // description class
+        class Description
+        {
+            constructor(sport_name)
+            {
+                if (sport_name == "running")
+                {
+                    this.description = "Speedy legs."
+                }
+
+                else if (sport_name == "biking")
+                {
+                    this.description = "Got quads?"
+                }
+
+                else if (sport_name == "swimming")
+                {
+                    this.description = "Swimming for dayyyys!"
+                }
+
+                else
+                {
+                    this.description = "DON'T SKIP LEG DAY!"
+                }
+            }
+        }
+
+
+        // function to process the sport choice
+        function processSportChoice()
+        {
+            // gather checked boxes
+            let aNewCheckedSportsBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+            let aNewOutput = [];
+
+            // create objects based on selection
+            for (i = 0; i<aNewCheckedSportsBoxes.length; i++)
+            {
+                let oSportofChoice = new SportOfChoice(aNewCheckedSportsBoxes[i].value);
+                alert(aNewCheckedSportsBoxes[i].value);
+                aNewOutput += oSportofChoice.description.description + " ";
+            }
+            
+
+
+            // return aNewOutput;
+            
+
+            // sSportName = document.getElementById("sportsCheckboxes").value;
+
+
+// ChatGPT loop
+            // for (let i = 0; i < aNewCheckedSportsBoxes.length; i++)
+            // {
+            //     const selection = aNewCheckedSportsBoxes[i];
+            //     const sportObject = new SportOfChoice(selection.value);
+
+            //     if (aNewOutput.length > 0)
+            //     {
+            //         aNewOutput += ", ";
+            //     }
+
+            //     aNewOutput += sportObject.description.description;
+            // }
+
+            
+            // let sSportNameSelected = Array.from(aNewCheckedSportsBoxes, function(selection)
+            // {
+            //     if (aNewOutput.length > 0)
+            //     {
+            //         aNewOutput += ", " + selection.value.description;
+            //         return aNewOutput;
+            //     }
+                
+            //     else
+            //     {
+            //         aNewOutput = selection.value.description;
+            //     }
+                
+            // }) 
+
+            // create the SportofChoice object, which creates the description
+            // if the sportofchoice is destroyed, so is the description
+
+
+            alert(aNewOutput);
+        }
 
     </script>
  </body>
